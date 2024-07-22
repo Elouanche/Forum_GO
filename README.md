@@ -69,7 +69,7 @@ Si votre projet est compilé et que vous souhaitez restart le jeu vous pouvez fa
 
 ## VI. Visuels de l'application web
 
-Voici l'interface générale du Forum du Hash :  
+Voici l'interface générale du Forum :  
 
 ![Page d'accueil](ressources/accueil.png)
 ![Page de connexion](ressources/login.png)
