@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="../static/asset/css/style.css">
+    <link rel="icon" type="image/png" href="../static/img/logo_forum.jpg">
+    <meta name="description" content="Voici quelques infos sur notre site">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
+</head>
+
+<body>
+    <header>
+        <div class="topnav">
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">Categories</a>
+                    <div class="dropdown-content" id="category-menu">
+                    </div>
+                </div>
+                <a href="#contact">Contact</a>
+                <a class="active" href="/about">About</a>
+            </div>
+            <p>Forum des BG</p>
+            {{if .IsLoggedIn}}
+                <a href="/account"><img src="./static/img/user.png" alt="Account"></a>
+            {{else}}
+                <a href="/login"><img src="./static/img/user.png" alt="Account"></a>
+            {{end}}
+        </div>
+    </header>
+
+    <main>
+        <div class="about">
+            <h1>A propos de notre forum</h1>
+            <br>
+            <p>
+                Bienvenue sur notre forum, un projet créé par deux étudiants, en 1ere année d'informatique.
+            </p>
+            <p>
+                Notre forum est conçu pour être une plateforme où les utilisateurs peuvent partager leurs pensées, idées et opinions sur divers sujets. Nous avons visé à créer une interface utilisateur conviviale et facile à naviguer, avec un focus sur la simplicité et la fonctionnalité.
+            </p>
+            <p>
+                Au cours du processus de développement, nous avons rencontré divers défis, mais nous avons persévéré et appris de nos expériences. Nous sommes fiers de présenter notre produit final, que nous espérons sera une ressource précieuse pour nos utilisateurs.
+            </p>
+            <p>
+                Nous tenons à vous remercier de visiter notre forum et espérons que vous le trouverez utile et agréable. Si vous avez des commentaires ou des suggestions, n'hésitez pas à nous contacter.
+            </p>
+            <br><br>
+        </div>
+    </main>
+
+    <footer>
+        <div class="botnav">
+            {{if .IsLoggedIn}}
+                <a href="/logout" id="logout">Logout</a>
+            {{else}}
+                <a href="/about">About</a>
+            {{end}}
+        </div>
+    </footer>
+</body>
+
+</html>

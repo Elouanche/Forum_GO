@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/asset/css/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" type="image/png" href="./static/img/logo_forum.jpg">
+    <title>Login</title>
+</head>
+<body class="background-image-login">
+    <header>
+        <div class="topnav">
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="#categories">Categories</a>
+                <a href="#contact">Contact</a>
+                <a href="/about">About</a>
+            </div>
+            <p>Forum Des BG</p>
+            <a href="/login"><img src="/static/img/user.png" alt="Login"></a>
+        </div>
+    </header>
+
+    <main class="login-page">
+        <div class="wrapper">
+            <h1>Login</h1>
+            <form id="loginForm" action="/login" method="post">
+                <div class="input-box">
+                    <input type="text" id="username" name="username" placeholder="Username">
+                    <i class='bx bxs-user'></i>
+                </div>
+
+                <div class="input-box">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <i class='bx bxs-lock-alt' ></i>
+                </div>
+
+                <button type="submit" id="loginButton">Log in</button>
+
+                <div class="register-link">
+                    <p>
+                        Still not registered ?
+        <a href="/create">Register</a>
+                    </p>
+                </div>
+
+                <div class="back">
+                    <p><a href="/">Back to home page</a></p>
+                </div>
+            </form>
+            {{ if eq .Status "failure" }}
+            <p style="color: red;">Nom d'utilisateur ou mot de passe incorrect.</p>
+            {{ end }}
+        </div>
+    </main>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+    
+            if (username === '' || password === '') {
+                alert('Veuillez remplir tous les champs.');
+            } else {
+                this.submit();
+            }
+        });
+    </script>
+    
+</body>
+</html>

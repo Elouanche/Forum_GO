@@ -1,0 +1,5 @@
+# Ignorer les fichiers exécutables
+*.exe
+
+# Ignorer le fichier de projet DB Browser for SQLite
+*.sqbpro

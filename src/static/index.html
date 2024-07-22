@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
+    <link rel="stylesheet" href="./static/asset/css/style.css">
+    <meta name="description" content="Penses-tu sincèrement pouvoir trouver un meilleur endroit pour discuter et jouer avec tes potes ?">
+    <link rel="icon" type="image/png" href="./static/img/logo_forum.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" />
+</head>
+
+<body>
+    <header>
+        <div class="topnav">
+            <div class="nav-links">
+                <a class="active" href="/">Home</a>
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">Categories</a>
+                    <div class="dropdown-content" id="category-menu">
+                    </div>
+                </div>
+                <a href="#contact">Contact</a>
+                <a href="/about">About</a>
+            </div>
+            <p>Forum des BG</p>
+            {{if .IsLoggedIn}}
+                
+            {{else}}
+                <a href="/login"><img src="./static/img/user.png" alt="Account"></a>
+            {{end}}
+        </div>
+    </header>
+
+    <main>
+
+        <h1>Liste des publications</h1>
+        <div class="posts-grid" id="posts-grid">
+            {{range .Posts}}
+                <div class="post" data-category="{{.PostCategory.String}}">
+                    <h2>{{.PostTitle}}</h2>
+                    <p>{{.PostText}}</p>
+                    {{if .PostCategory.Valid}}
+                        <p>{{.PostCategory.String}}</p>
+                    {{end}}
+                    <img src="{{.PostImg}}" alt="Image du post">
+                    <p>Posté par {{.UserName}} le {{if .PostDate.Valid}}{{.PostDate.String}}{{else}}Date non disponible{{end}}</p>
+                    <p>
+                        <button class="like-button" data-post-id="{{.PostID}}" data-reaction-type="like">
+                            <i class="fa-regular fa-thumbs-up"></i> {{if .PostLikes.Valid}}{{.PostLikes.Int64}}{{else}}0{{end}}
+                        </button>
+                        <button class="dislike-button" data-post-id="{{.PostID}}" data-reaction-type="dislike">
+                            <i class="fa-regular fa-thumbs-down"></i> {{if .PostDislikes.Valid}}{{.PostDislikes.Int64}}{{else}}0{{end}}
+                        </button>
+                    </p>
+
+                    <h3>Commentaires</h3>
+                    {{range .Comments}}
+                        <div class="comment">
+                            <p>Commentaire par {{.UserName}} :</p>
+                            <p>{{.CommentContent}}</p>
+                        </div>
+                    {{end}}
+
+                    <!-- Formulaire de commentaire pour chaque post -->
+                    <form action="/comment" method="post">
+                        <input type="hidden" name="post_id" value="{{.PostID}}">
+                        <textarea name="comment_content" placeholder="Write your comment here..." required></textarea>
+                        <button type="submit">Send</button>
+                    </form>
+                </div>
+            {{end}}
+        </div>
+
+        <div class="create-post">
+            <a href="/post">Créer un post</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="botnav">
+            {{if .IsLoggedIn}}
+                <a href="/logout" id="logout">Logout</a>
+            {{else}}
+                <a href="/about">About</a>
+            {{end}}
+        </div>
+    </footer>
+
+    <script>
+
+        // Ajout du JS pour les réactions
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".like-button, .dislike-button").forEach(button => {
+                button.addEventListener("click", function() {
+                    const postId = this.getAttribute("data-post-id");
+                    const reactionType = this.getAttribute("data-reaction-type");
+
+                    fetch(`/posts/${postId}/react`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: `reaction_type=${reactionType}`
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            const likesCount = this.querySelector(".fa-thumbs-up");
+                            const dislikesCount = this.querySelector(".fa-thumbs-down");
+                            if (reactionType === "like") {
+                                likesCount.textContent = data.likes;
+                            } else {
+                                dislikesCount.textContent = data.dislikes;
+                            }
+                        } else {
+                            alert("Erreur lors de l'enregistrement de la réaction.");
+                        }
+                    })
+                    .catch(error => console.error("Erreur:", error));
+                });
+            });
+
+            // Ajout des catégories au menu déroulant
+            const categories = [
+                "All", "Sport", "Music", "Travel", "Food", "Fashion", "Technology",
+                "Video Games", "Movies", "Books", "Animals", "Art", "Science",
+                "History", "Politics", "Economy", "Health", "Education", "Society",
+                "Religion", "Psychology", "Philosophy", "Languages", "Others"
+            ];
+
+            const categoryMenu = document.getElementById("category-menu");
+            categories.forEach(category => {
+                const categoryLink = document.createElement("a");
+                categoryLink.href = "#";
+                categoryLink.textContent = category;
+                categoryLink.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    filterPostsByCategory(category);
+                });
+                categoryMenu.appendChild(categoryLink);
+            });
+
+            function filterPostsByCategory(category) {
+                const posts = document.querySelectorAll(".post");
+                posts.forEach(post => {
+                    if (category === "All" || post.getAttribute("data-category") === category) {
+                        post.style.display = "block";
+                    } else {
+                        post.style.display = "none";
+                    }
+                });
+            }
+        });
+
+        const logoutButton = document.getElementById("logout");
+        if (logoutButton) {
+            logoutButton.addEventListener("click", function(event) {
+                event.preventDefault();
+                const confirmed = confirm("Are you sure you want to logout?");
+                if (confirmed) {
+                    window.location.href = "/logout";
+                    alert("You have been logged out.");
+                } else {
+                    alert("Logout canceled.");
+                }
+            })
+        }
+    </script>
+</body>
+</html>

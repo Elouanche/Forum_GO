@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un Post</title>
+    <link rel="stylesheet" href="/static/asset/css/style.css">
+    <link rel="icon" type="image/png" href="./static/img/logo_forum.jpg">
+</head>
+<body>
+    <main class="post-page main-content">
+
+        <div class="wrapper-post">
+
+            <h1>Créer un Post</h1>
+
+            <form id="postForm" action="/post" method="post" enctype="multipart/form-data">
+
+            <div class="input-box">
+                <input type="text" id="title" name="title" placeholder="Title"  required>
+            </div>
+
+            <div class="input-box">
+                <input type="text" id="description" name="description" placeholder="Your text" required>
+            </div>
+
+            <div class="input-box">
+                <input list="options" id="categories" name="categories" placeholder="Categories" required>
+                <datalist id="options">
+                    <option value="Sport">
+                    <option value="Music">
+                    <option value="Travel">
+                    <option value="Food">
+                    <option value="Fashion">
+                    <option value="Technology">
+                    <option value="Video Games">
+                    <option value="Movies">
+                    <option value="Books">
+                    <option value="Animals">
+                    <option value="Art">
+                    <option value="Science">
+                    <option value="History">
+                    <option value="Politics">
+                    <option value="Economy">
+                    <option value="Health">
+                    <option value="Education">
+                    <option value="Society">
+                    <option value="Religion">
+                    <option value="Psychology">
+                    <option value="Philosophy">
+                    <option value="Languages">
+                    <option value="Others">
+                </datalist>
+            </div>
+
+            <div class="input-image">
+                <label for="photo" class="custom-file-upload">Choose a file</label>
+                <input type="file" id="photo" name="photo" accept="image/*" style="display: none;" required>
+            </div>
+
+            <div class="post-button">
+                <button type="submit" id="createPostButton">Create</button>
+            </div>
+        </form>
+    <br>
+
+    <div class="back-post">
+        <a href="/">Back to home page</a>
+    </div>
+</div>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const categoryInput = document.getElementById('categories');
+        const form = document.querySelector('form');
+        
+        form.addEventListener('submit', function (event) {
+            const datalist = document.getElementById('options');
+            const options = Array.from(datalist.options).map(option => option.value);
+            if (!options.includes(categoryInput.value)) {
+                event.preventDefault();
+                alert('Chose a valid category !');
+                categoryInput.focus();
+            }
+        });
+    });
+
+        const createPostButton = document.getElementById('createPostButton');
+        const postForm = document.getElementById('postForm');
+
+        if (createPostButton) {
+            createPostButton.addEventListener("click", function(event) {
+                event.preventDefault();
+                alert("Your post is now online !");
+                postForm.submit();
+            });
+        }
+</script>
+</body>
+</html>
