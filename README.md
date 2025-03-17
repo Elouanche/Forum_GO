@@ -1,93 +1,93 @@
 # Forum - Documentation
 
-Projet réalisé en binôme.
+This project was done in pairs.
 
-## Sommaire
-I. [Rappel du Projet](#i-rappel-du-projet)  
-II. [Cadre de développement](#ii-cadre-de-développement)  
-III. [Stack Technique](#iii-stack-technique)  
-IV. [Comment installer le projet](#iv-comment-installer-le-projet)  
-V. [Utilisation](#v-utilisation)  
-VI. [Visuels de l'application web](#vi-visuels-de-lapplication-web)  
-VII. [Axes d'amélioration](#vii-axes-damélioration)  
-VIII. [Post Scriptum](#viii-post-scriptum)
+## Table of Contents
+I. [Project Overview](#i-project-overview)  
+II. [Development Environment](#ii-development-environment)  
+III. [Tech Stack](#iii-tech-stack)  
+IV. [How to Install the Project](#iv-how-to-install-the-project)  
+V. [Usage](#v-usage)  
+VI. [Web Application Screenshots](#vi-web-application-screenshots)  
+VII. [Improvement Suggestions](#vii-improvement-suggestions)  
+VIII. [Post Scriptum](#viii-post-scriptum)  
 
-## I. Rappel du Projet
+## I. Project Overview
 
-Ce projet Forum consiste à créer un serveur en golang permettant de lancer un site web (forum), géré avec une base de données SQLite. 
-Le CRUD devait être développé en Golang permettant ainsi la récupération des données sur la DataBase et l'envoi de celles-ci sur le forum.  
+The Forum project involves creating a server in Golang to run a website (forum), managed by an SQLite database. 
+The CRUD operations were developed in Golang to allow the retrieval of data from the database and to send it to the forum.
 
-Nous devions permettre aux utilisateurs de s'enregistrer et de se connecter, de créer des posts, laisser des commentaires et liker/disliker 
-les posts s'ils sont connectés. Si un utilisateur n'est pas connecté, il peut voir les posts.
+The objective was to allow users to register and log in, create posts, leave comments, and like/dislike posts if they are logged in. If a user is not logged in, they can still view the posts.
 
-## II. Cadre de développement
+## II. Development Environment
 
-- **Établissement** : Rennes Ynov Campus
-- **Niveau d'études** : Première année en Bachelor Informatique
-- **Contraintes** :
-    * 1 mois
-    * Travail en binôme
-    * Serveur en golang
-    * Gestion des données via SQLite
-    * Gestion des utilisateurs
-    * Gestion des cookies de session
+- **Institution**: Rennes Ynov Campus
+- **Study Level**: First year in Bachelor's degree in Computer Science
+- **Project Duration**: 1 month
+- **Main Constraints**:
+    - Work done in pairs
+    - Golang server
+    - Data management via SQLite
+    - User management
+    - Session cookie handling
 
-## III. Stack Technique
+## III. Tech Stack
 
-- **Langage** : Golang, HTML/CSS et JavaScript
+- **Languages**: Golang, HTML/CSS, and JavaScript
+- **Database**: SQLite
 
-## IV. Comment installer le projet
+## IV. How to Install the Project
 
-### 1 - Prérequis
+### 1 - Prerequisites
 
-Avant toute chose, il vous faut un compilateur C. Si vous n'en avez pas, voici les étapes à suivre :  
+Before anything, you need a C compiler. If you don’t have one, follow these steps:
 
-- Installer le ZIP en cliquant sur ce [lien](https://github.com/brechtsanders/winlibs_mingw/releases/download/14.1.0posix-18.1.5-11.0.1-ucrt-r1/winlibs-x86_64-posix-seh-gcc-14.1.0-mingw-w64ucrt-11.0.1-r1.zip)  
-- Décompresser le dossier à l'intérieur  
-- Déplacer ce dossier dans **C:\Program Files**  
-- Trouver le dossier **bin** puis copier le chemin  
-- Dans votre barre de recherche Windows, chercher *"Variables d'environnement"* et cliquer sur **Modifier les variables d'environnement système**  
-- Cliquer sur **Variables d'environnement**  
-- Dans *"Variables système"*, sélectionner **Path** puis cliquer sur **Modifier**  
-- Coller le lien préalablement copié à la fin du fichier puis cliquer sur *"Ok"* afin de fermer les différentes fenêtres  
-- Ouvrez ensuite vôtre cmd, VisualStudioCode, ou votre IDE habituel
-- Copier cette commande dans votre terminal VSCode : **$env:CGO_ENABLED=1**  
-- Attendre la fin de l'exécution de la commande puis rédemarrer votre IDE  
+- Download the ZIP file from this [link](https://github.com/brechtsanders/winlibs_mingw/releases/download/14.1.0posix-18.1.5-11.0.1-ucrt-r1/winlibs-x86_64-posix-seh-gcc-14.1.0-mingw-w64ucrt-11.0.1-r1.zip)
+- Extract the folder inside
+- Move the folder to **C:\Program Files**
+- Find the **bin** folder and copy the path
+- In the Windows search bar, search for *"Environment Variables"* and click **Edit the system environment variables**
+- Click **Environment Variables**
+- In *"System variables"*, select **Path** and click **Edit**
+- Paste the copied link at the end of the file and click *"Ok"* to close the windows
+- Then, open your cmd, Visual Studio Code, or your usual IDE
+- Paste the command in the terminal: **$env:CGO_ENABLED=1**  
+- Wait for the command to finish and then restart your IDE
 
-Vous êtes désormais prêt à utiliser ce projet.
+Now you're ready to use this project.
 
-### 2 - Cloner le répertoire
+### 2 - Clone the Repository
 
-Placez-vous dans le dossier de votre choix afin de cloner le répertoire.
-Ouvrez ensuite vôtre cmd, VisualStudioCode, ou votre IDE habituel, puis utilisez la commande ``git clone https://github.com/Elouanche/Forum_GO.git``.
+Navigate to the directory where you want to clone the repository.
+Then, open your cmd, Visual Studio Code, or your preferred IDE, and run the following command:
+``git clone https://github.com/Elouanche/Forum_GO.git``
 
-## V. Utilisation
+## V. Usage
 
-Sasissez à la racine du projet : **make build** puis **make run** afin de compiler et lancer le projet. 
-Une fois le jeu essayé, n'oublier pas d'utiliser **make clean**.
-Si votre projet est compilé et que vous souhaitez restart le jeu vous pouvez faire : **make restart**.
+At the root of the project, run **make build** and then **make run** to compile and start the project. 
+Once you’re done testing the forum, don't forget to use **make clean**.
+If your project is compiled and you want to restart the forum, you can run: **make restart**.
 
-## VI. Visuels de l'application web
+## VI. Web Application Screenshots
 
-Voici l'interface générale du Forum :  
+Here is the general interface of the Forum:  
 
-![Page d'accueil](ressources/accueil.png)
-![Page de connexion](ressources/login.png)
+![Home Page](ressources/accueil.png)  
+![Login Page](ressources/login.png)
 
-## VII. Axes d'amélioration
+## VII. Improvement Suggestions
 
 ### 1 - Likes/Dislikes
 
-L'implantation des likes et des dislikes a été faite, et nous pouvons ainsi liker un post. Ce like (ou dislike) sera retrouvé dans la base de données 
-lié à un utilisateur et à un post.  
-L'incrémentation sur le site ne se fait pas encore, ce qui est notre principal axe de progrès sur ce projet.
+The implementation of likes and dislikes has been done, and we can now like a post. This like (or dislike) is stored in the database linked to a user and a post.  
+However, the incrementing feature on the website is not yet working, which is the main area for improvement in this project.
 
 ### 2 - Docker
 
-Actuellement, il est possible de créer une image Docker via la commande :  
+Currently, it is possible to create a Docker image using the command:  
 ``docker build -t forum-app .``  
-Le problème rencontré actuellement est que l'image ne se run pas encore.
+However, the image does not yet run.
 
-## VIII. Remerciements
+## VIII. Post Scriptum
 
-Je vous remercie d'avoir essayé mon projet en espérant que cela vous a plu !
+Thank you for trying out my project, and I hope you enjoyed it!
